@@ -1,4 +1,7 @@
-﻿namespace OptiPath
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace OptiPath
 {
     public class Route<TNode>
         where TNode : class, INode
@@ -13,6 +16,8 @@
         /// </summary>
         public TNode End { get; private set; }
 
+        public TNode[] Path { get; private set; }
+
         /// <summary>
         /// The total distance of the Route.
         /// </summary>
@@ -24,10 +29,11 @@
         /// <param name="start">The starting Node of the Route.</param>
         /// <param name="end">The ending Node of the Route.</param>
         /// <param name="distance">The total distance of the Route.</param>
-        public Route(TNode start, TNode end, int distance)
+        public Route(TNode start, TNode end, IEnumerable<TNode> path, int distance)
         {
             Start = start;
             End = end;
+            Path = path.ToArray();
             Distance = distance;
         }
     }

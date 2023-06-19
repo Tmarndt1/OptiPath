@@ -92,18 +92,18 @@ namespace OptiPath
                 throw new ArgumentException("No route found between start and end nodes.");
             }
 
-            List<TNode> route = new List<TNode>();
+            List<TNode> path = new List<TNode>();
 
             TNode current = end;
 
             while (current != null)
             {
-                route.Insert(0, current);
+                path.Insert(0, current);
 
                 current = previous[current];
             }
 
-            return new Route<TNode>(start, end, GetDistance(route));
+            return new Route<TNode>(start, end, path, GetDistance(path));
         }
 
         private int GetDistance(List<TNode> route)
