@@ -1,6 +1,7 @@
 ﻿using OptiPath.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OptiPath
 {
@@ -15,6 +16,8 @@ namespace OptiPath
         public IEnumerable<TNode> Keys => _graph.Keys;
 
         public bool ContainsKey(TNode node) => _graph.ContainsKey(node);
+
+        public IEnumerable<TEdge> GetEdgesFromNode(TNode node) => _graph[node].Values;
 
         public void AddNode(TNode node)
         {
@@ -36,9 +39,9 @@ namespace OptiPath
                 throw new ArgumentException("Map does not contain the target Node.");
             }
 
-            if (_graph[edge.Target].ContainsKey(edge.Source))
+            if (_graph[edge.Source].ContainsKey(edge.Target))
             {
-                throw new ArgumentException($"Circular reference detected between {edge.Source.Name} and {edge.Target.Name}");
+                throw new ArgumentException($"Edge already exists with the same source {edge.Source.Name} and target {edge.Target.Name}");
             }
 
             _graph[edge.Source][edge.Target] = edge;

@@ -80,7 +80,7 @@ namespace OptiPath.Test
             map.AddEdge(new Edge(nodeC, nodeD, 2));
             
             map.AddEdge(new Edge(nodeA, nodeC, 1));
-            map.AddEdge(new Edge(nodeC, nodeB, 1));
+            map.AddEdge(new Edge(nodeC, nodeB, 3));
             map.AddEdge(new Edge(nodeB, nodeD, 1));
 
 
@@ -92,23 +92,38 @@ namespace OptiPath.Test
         }
 
         [Fact]
-        public void Circular_References_Should_Error()
+        public void FindFastestRoute_WhenAlotRouteExists_ShouldReturnCorrectRoute()
         {
             // Arrange
             Node nodeA = new Node("A");
             Node nodeB = new Node("B");
             Node nodeC = new Node("C");
             Node nodeD = new Node("D");
+            Node nodeE = new Node("E");
+            Node nodeF = new Node("F");
 
             map.AddNode(nodeA);
             map.AddNode(nodeB);
             map.AddNode(nodeC);
             map.AddNode(nodeD);
+            map.AddNode(nodeE);
+            map.AddNode(nodeF);
 
             map.AddEdge(new Edge(nodeA, nodeB, 5));
+            map.AddEdge(new Edge(nodeB, nodeC, 3));
+            map.AddEdge(new Edge(nodeC, nodeD, 2));
+            map.AddEdge(new Edge(nodeD, nodeE, 1));
+            map.AddEdge(new Edge(nodeE, nodeF, 3));
 
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => map.AddEdge(new Edge(nodeB, nodeA, 1)));
+            map.AddEdge(new Edge(nodeA, nodeC, 2));
+            map.AddEdge(new Edge(nodeC, nodeB, 5));
+            map.AddEdge(new Edge(nodeB, nodeD, 1));
+
+            // Act
+            var route = map.FindFastestRoute(nodeA, nodeF);
+
+            // Assert
+            Assert.Equal(8, route.Distance);
         }
     }
 }

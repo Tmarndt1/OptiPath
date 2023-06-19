@@ -1,4 +1,6 @@
-﻿namespace OptiPath
+﻿using System;
+
+namespace OptiPath
 {
     public interface INode
     {
