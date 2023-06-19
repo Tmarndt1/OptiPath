@@ -21,22 +21,24 @@ namespace OptiPath
 
         public void AddNode(TNode node)
         {
-            if (!_graph.ContainsKey(node))
+            if (_graph.ContainsKey(node))
             {
-                _graph[node] = new Dictionary<TNode, TEdge>();
+                throw new ArgumentException($"Graph already contains node {node.Name}");
             }
+
+            _graph[node] = new Dictionary<TNode, TEdge>();
         }
 
         public void AddEdge(TEdge edge)
         {
             if (!_graph.ContainsKey(edge.Source))
             {
-                throw new ArgumentException("Map does not contain the source Node.");
+                throw new ArgumentException("Graph does not contain the source Node.");
             }
 
             if (!_graph.ContainsKey(edge.Target))
             {
-                throw new ArgumentException("Map does not contain the target Node.");
+                throw new ArgumentException("Graph does not contain the target Node.");
             }
 
             if (_graph[edge.Source].ContainsKey(edge.Target))
