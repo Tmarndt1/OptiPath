@@ -46,14 +46,23 @@ public class Node : INode
     }
 }
 
-public interface IEdge<out TNode>
-        where TNode : INode
+
+public class Edge : IEdge<Node>
 {
-    public TNode Source { get; }
+    public Node Source { get; }
 
-    public TNode Target { get; }
+    public Node Target { get; }
 
-    public int GetWeight();
+    private readonly int _weight = 0;
+
+    public Edge(Node source, Node target, int weight)
+    {
+        Source = source;
+        Target = target;
+        _weight = weight;
+    }
+
+    public int GetWeight() => _weight;
 }
 
 class Program
@@ -68,8 +77,8 @@ class Program
         Node node2 = new Node("B");
         Node node3 = new Node("C");
 
-        Edge edge1 = new Edge(node1, node2);
-        Edge edge2 = new Edge(node2, node3);
+        Edge edge1 = new Edge(node1, node2, 1);
+        Edge edge2 = new Edge(node2, node3, 2);
 
         map.AddNode(node1);
         map.AddNode(node2);
@@ -81,8 +90,8 @@ class Program
         Route<Node> fastestRoute = map.FindFastestRoute(node1, node3);
 
         // Access route details
-        Console.WriteLine($"Fastest route distance: {fastestRoute.Distance}");
-        Console.WriteLine($"Fastest route path: {string.Join(" -> ", fastestRoute.Path)}");
+        Console.WriteLine($"Fastest route distance: {fastestRoute.Distance}"); // Equals 2
+        Console.WriteLine($"Fastest route path: {string.Join(" -> ", fastestRoute.Path)}"); // A -> B -> C
     }
 }
 
