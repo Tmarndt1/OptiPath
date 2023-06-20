@@ -70,7 +70,7 @@ class Program
     static void Main(string[] args)
     {
         // Create a map
-        Map<Node, Edge> map = new Map<MyNode, Edge>();
+        Map<Node, Edge> map = new Map<Node, Edge>();
 
         // Add nodes and edges to the map
         Node node1 = new Node("A");
