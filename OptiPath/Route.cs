@@ -36,5 +36,11 @@ namespace OptiPath
             Path = path.ToArray();
             Distance = distance;
         }
-    }
+
+        /// <summary>
+        /// Overriden ToString that returns the Path's Node Names.
+        /// </summary>
+        /// <returns>A string with the combined Path.</returns>
+        public override string ToString() => string.Join(" -> ", Path.Select(x => x.Name));
+}
 }

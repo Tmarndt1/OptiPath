@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace OptiPath.Test
@@ -59,6 +60,7 @@ namespace OptiPath.Test
 
             // Assert
             Assert.Equal(10, route.Distance);
+            Assert.Equal("A -> B -> C -> D", route.ToString());
         }
 
         [Fact]
@@ -89,6 +91,7 @@ namespace OptiPath.Test
 
             // Assert
             Assert.Equal(3, route.Distance);
+            Assert.Equal("A -> C -> D", route.ToString());
         }
 
         [Fact]
@@ -124,6 +127,7 @@ namespace OptiPath.Test
 
             // Assert
             Assert.Equal(8, route.Distance);
+            Assert.Equal("A -> C -> D -> E -> F", route.ToString());
         }
     }
 }
