@@ -1,4 +1,6 @@
-﻿namespace OptiPath.Benchmark
+﻿using System;
+
+namespace OptiPath.Benchmark
 {
     internal class Program
     {
