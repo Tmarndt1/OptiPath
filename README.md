@@ -90,8 +90,8 @@ class Program
         Route<Node> fastestRoute = map.FindFastestRoute(node1, node3);
 
         // Access route details
-        Console.WriteLine($"Fastest route distance: {fastestRoute.Distance}"); // Equals 2
-        Console.WriteLine($"Fastest route path: {string.Join(" -> ", fastestRoute.Path)}"); // A -> B -> C
+        Console.WriteLine($"Fastest route distance: {route.Distance}"); // Equals 2
+        Console.WriteLine($"Fastest route path: {route.Path}"); // A -> B -> C
     }
 }
 
