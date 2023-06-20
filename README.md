@@ -36,16 +36,24 @@ Here's a simple example that demonstrates the usage of the OptiPath library:
 using OptiPath;
 
 // Define custom node and edge types
-public class MyNode : INode
+public class Node : INode
 {
-    // Implement INode properties and methods
-    // ...
+    public string Name { get; }
+
+    public Node(string name)
+    {
+        Name = name;
+    }
 }
 
-public class MyEdge : IEdge<MyNode>
+public interface IEdge<out TNode>
+        where TNode : INode
 {
-    // Implement IEdge properties and methods
-    // ...
+    public TNode Source { get; }
+
+    public TNode Target { get; }
+
+    public int GetWeight();
 }
 
 class Program
@@ -53,15 +61,15 @@ class Program
     static void Main(string[] args)
     {
         // Create a map
-        Map<MyNode, MyEdge> map = new Map<MyNode, MyEdge>();
+        Map<Node, Edge> map = new Map<MyNode, Edge>();
 
         // Add nodes and edges to the map
-        MyNode node1 = new MyNode();
-        MyNode node2 = new MyNode();
-        MyNode node3 = new MyNode();
+        Node node1 = new Node("A");
+        Node node2 = new Node("B");
+        Node node3 = new Node("C");
 
-        MyEdge edge1 = new MyEdge(node1, node2);
-        MyEdge edge2 = new MyEdge(node2, node3);
+        Edge edge1 = new Edge(node1, node2);
+        Edge edge2 = new Edge(node2, node3);
 
         map.AddNode(node1);
         map.AddNode(node2);
@@ -70,11 +78,7 @@ class Program
         map.AddEdge(edge1);
         map.AddEdge(edge2);
 
-        // Find the fastest route
-        MyNode startNode = node1;
-        MyNode endNode = node3;
-
-        Route<MyNode> fastestRoute = map.FindFastestRoute(startNode, endNode);
+        Route<Node> fastestRoute = map.FindFastestRoute(node1, node3);
 
         // Access route details
         Console.WriteLine($"Fastest route distance: {fastestRoute.Distance}");
