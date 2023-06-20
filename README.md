@@ -1,5 +1,5 @@
 # OptiPath
-OptiPath is a C# .NET library that provides functionality for finding the most optimal route on a map with nodes and edges. It implements Dijkstra's algorithm to calculate the fastest route between two nodes.
+OptiPath is a C# .NET library that provides functionality for finding the most optimal route on a map with nodes and edges.
 
 main: ![Build Status](https://github.com/Tmarndt1/XReflect/workflows/.NET/badge.svg?branch=main)
 
